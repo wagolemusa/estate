@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Real Estate</title>
+</head>
+<body>
+<h1>The {{ title }} warking </h1>
+
+{% for obj in query_list %}
+	{{ obj.id }}<br/>
+	{{ obj.title }}<br/>
+	{{ obj.content }}<br/>
+	{{ obj.timestamp }}<br/>
+	{{ obj.updated }}<br/>
+
+{% endfor %}
+
+</body>
+</html>
