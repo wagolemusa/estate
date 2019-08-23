@@ -4,11 +4,13 @@
 	<title>Real Estate</title>
 </head>
 <body>
+
 <h1>The {{ title }} warking </h1>
 
 {% for obj in query_list %}
-	{{ obj.id }}<br/>
-	{{ obj.title }}<br/>
+{% url "estate:detail" id=obj.id %}
+
+	<a href='{{ obj.get_obsolute_url }}'>{{ obj.title }}</a><br/>
 	{{ obj.content }}<br/>
 	{{ obj.timestamp }}<br/>
 	{{ obj.updated }}<br/>

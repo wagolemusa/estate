@@ -9,7 +9,7 @@ from .views import (
 	post_delete,
 
 	)
-
+app_name = 'estate'
 urlpatterns = [
     path('', home, name='home'),
     path('create', post_create),
