@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404,redirect
 
 from .models import Post
 from .forms import PostForm
@@ -15,9 +15,12 @@ def home(request):
 		"title": "List"
 	}
 	# return HttpResponse("<h1>List Home</h1>")
-	return render(request, "index.html", context)
+	return render(request, "post_list.html", context)
 
 def post_create(request):
+	"""
+	This method is for creating Posts
+	"""
 	form  = PostForm(request.POST or None)
 	if form.is_valid():
 		instance = form.save(commit=False)
@@ -26,7 +29,7 @@ def post_create(request):
 		messages.success(request, "<a href='#'>itme</a> successfuly Created", extra_tags='html_safe')
 		return HttpResponseRedirect(instance.get_obsolute_url())
 	else:
-		messages.error(request, "Not successful Created")
+		messages.error(request, "Not successfuly Created")
 
 	context = {
 		"form": form,
@@ -62,8 +65,10 @@ def post_update(request, id=None):
 	}
 	return render(request, "post_update.html", context)
 
-def post_delete(request):
-	return HttpResponse("<h1>Delete</h1>")
-
+def post_delete(request, id=None):
+	instance = get_object_or_404(Post ,id=id)
+	instance.delete()
+	messages.success(request, "Succesfuly Deleted")
+	return redirect("estate:home")
 
 
